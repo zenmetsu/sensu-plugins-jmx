@@ -27,7 +27,7 @@
 #
 
 require 'sensu-plugin/metric/cli'
-require 'jjjjmx'
+require 'jmx'
 require 'socket'
 
 class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
