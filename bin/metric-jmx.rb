@@ -77,7 +77,6 @@ class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
          long: '--password',
 
   def run
-
     client = JMX.connect(:host => 'localhost', :port => config[:port])
     timestamp = Time.now.to_i
     metrics = client["java.lang:type=Memory"]
@@ -89,7 +88,5 @@ class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
     end
     ok
   end
-
-  def 
 
 end
