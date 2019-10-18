@@ -79,7 +79,7 @@ class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
   def run
     client = JMX.connect(host: 'localhost', port: config[:port])
     timestamp = Time.now.to_i
-    metrics = client["java.lang:type=Memory"]
+    metrics = client['java.lang:type=Memory']
 
     metrics.each do |parent, children|
       children.each do |child, value|
