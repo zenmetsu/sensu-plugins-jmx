@@ -29,6 +29,7 @@
 require 'sensu-plugin/metric/cli'
 require 'jmx'
 require 'socket'
+require 'jruby-jars'
 
 class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
   option :scheme,
