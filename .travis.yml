@@ -1,0 +1,38 @@
+sudo: true
+service: docker
+language: ruby
+cache:
+- bundler
+install:
+- bundle install
+before_install:
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
+  - gem install bundler -v 1.15
+install:
+- bundle install
+rvm:
+- 2.4.1
+notifications:
+  email:
+    recipients:
+    - vespira@gmail.com
+    on_success: change
+    on_failure: always
+script:
+- gem build sensu-plugins-jmx.gemspec
+- gem install sensu-plugins-jmx-*.gem
+- bundle exec rake default
+before_deploy:
+- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"  
+  
+deploy:
+- provider: script
+  script: chmod +x bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh && bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-jmx
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    rvm: 2.4.1    
+    
+env:
+  global:
