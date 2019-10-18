@@ -6,10 +6,9 @@ cache:
 install:
 - bundle install
 before_install:
-  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
-  - gem install bundler -v 1.15
-install:
-- bundle install
+- sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
+  -N DOCKER )
+- gem install bundler -v 1.15
 rvm:
 - 2.4.1
 notifications:
@@ -23,16 +22,17 @@ script:
 - gem install sensu-plugins-jmx-*.gem
 - bundle exec rake default
 before_deploy:
-- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git bonsai || echo 'bonsai/ exists, skipping git clone'"  
-  
+- bash -c "[ ! -d bonsai/ ] && git clone https://github.com/sensu/sensu-go-bonsai-asset.git
+  bonsai || echo 'bonsai/ exists, skipping git clone'"
 deploy:
 - provider: script
-  script: chmod +x bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh && bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh sensu-plugins-jmx
+  script: chmod +x bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh && bonsai/ruby-runtime/travis-build-ruby-plugin-assets.sh
+    sensu-plugins-jmx
   skip_cleanup: true
   on:
     tags: true
     all_branches: true
-    rvm: 2.4.1    
-    
+    rvm: 2.4.1
 env:
   global:
+    secure: AlSCMNsSGn6jLMgrrPWDoFCNGhkXbxnRtRTG1Yqhg10m5+sI/S7BCC4heJ9Qgie3tHVJUyLTLDuZNdHFqIMZ3rsZKc1MrFxzfi1dVp6TwJ/I98NAJKEZjW7KjE3P5Jy5mZbrRItvPYJ3RPpZ9g6GsHTsZrRm7GgmFJJiJrKdgIxWoMjvy7PP1XSDoK/naIfqFUKQHxt+8QWkeWf5+CV0Ove228q7lgt2av3J02N3hPEVgxYk64UdKqLhm5As2GGYd4FY1b9NJ662FGgENQQZwyzU7hqvHhssvDpn9Pj1g02NLXkpGyPQLcxiAMzUb8s+tuSMXpEfmSUZDAPYxvlKMeF4Un84fJ3u102jj/CJJ2w20L1Fy1Qrr3b7ICqlj+e+CTAG+LAJsCkm8bEo6w/m8N3iy6SzRRJnuvHcCfDApDqDA20oRskiaNOVLfyNhW8qL3mv7ESIuI4H16tIrwTwvv2RQ3IuImqsXhtN4nB/SLOxUjnp0aKyhqasmnMizAja2uwPqjNO38rK6RNviftw7/7JepHkz+WfxZ5LqMC2p0hdg3AwpwXvGYuPAgHa5+13TUakD9YhkldyOUWiO+Ua/5uuo5AqxWy/Wn7kD5XRKPgZ/kbsjzLxmQ0QqnEREOoFsl84ED2wiWS5OPePVIgzXVhspJPNuToDg2lmx787mYI=
