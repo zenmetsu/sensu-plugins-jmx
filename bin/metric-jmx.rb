@@ -74,7 +74,7 @@ class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
   option :attribute,
          description: 'JMX password',
          short: '-p',
-         long: '--password',
+         long: '--password'
 
   def run
     client = JMX.connect(:host => 'localhost', :port => config[:port])
@@ -88,5 +88,4 @@ class JMXGraphite < Sensu::Plugin::Metric::CLI::Graphite
     end
     ok
   end
-
 end
