@@ -30,3 +30,6 @@ Style/Documentation:
 
 Style/Next:
   Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.4
