@@ -31,6 +31,7 @@ Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
 
   s.add_runtime_dependency 'english',      '0.6.3'
   s.add_runtime_dependency 'jmx',          '~> 1.0'
+  s.add_runtime_dependency 'jruby-jars',   '~> 9.2'
   s.add_runtime_dependency 'sensu-plugin', '~> 4.0'
 
   s.add_development_dependency 'bundler',                   '~> 1.7'
